@@ -18,10 +18,10 @@ def tear_down(exception):
     storage.close()
 
 
-@app.route("/api/v1/nop")
-def not_found():
+@app.errorhandler(404)
+def handler_404(error):
     """ Response to not found """
-    return jsonify({"error": "Not found"})
+    return jsonify({"error": "Not found"}), 404
 
 
 if __name__ == "__main__":
