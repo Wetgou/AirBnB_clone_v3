@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Python api built with flask"""
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 from os import getenv
