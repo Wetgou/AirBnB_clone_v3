@@ -7,7 +7,7 @@ from models.place import Place
 import models
 
 
-@app_views.route('/places/<city_id>/places', methods=['GET'])
+@app_views.route('/cities/<city_id>/places', methods=['GET'])
 def list_places(city_id=None):
     """ Return places by city """
     my_city = storage.get('City', city_id)
