@@ -8,10 +8,11 @@ import models
 
 
 @app_views.route('/places/<place_id>/reviews', methods=['GET'])
+@app_views.route('/places/<place_id>/reviews/', methods=['GET'])
 def list_reviews(place_id=None):
     """ Return places by city """
     my_place = storage.get('Place', place_id)
-    if my_city is not None:
+    if my_place is not None:
         review_list = []
         for value in storage.all('Review').values():
             if value.place_id == place_id:
