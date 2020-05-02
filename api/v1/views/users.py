@@ -30,7 +30,7 @@ def delete_user(user_id):
     if my_object is not None:
         storage.delete(my_object)
         storage.save()
-        return jsonify({})
+        return jsonify({}), 200
     else:
         abort(404)
 
@@ -50,8 +50,6 @@ def create_user():
     if not request.get_json():
         abort(400, "Not a JSON")
     data = request.get_json(force=True)
-    if 'name' not in request.json:
-        return jsonify({"Error": "Missing name"}), 400
     if 'email' not in request.json:
         return jsonify({"Error": "Missing email"}), 400
     if 'password' not in request.json:
