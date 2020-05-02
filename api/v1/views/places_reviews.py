@@ -17,7 +17,7 @@ def list_reviews(place_id=None):
         for value in storage.all('Review').values():
             if value.place_id == place_id:
                 review_list.append(value.to_dict())
-        return jsonify(place_list)
+        return jsonify(review_list)
     else:
         abort(404)
 
