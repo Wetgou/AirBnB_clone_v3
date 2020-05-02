@@ -21,7 +21,8 @@ def list_place_amenities(place_id=None):
         abort(404)
 
 
-@app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['DELETE'])
+@app_views.route('/places/<place_id>/amenities/<amenity_id>',
+                 methods=['DELETE'])
 def delete_place_amenity(amenity_id, place_id):
     """ Delete an object """
     my_amenity = storage.get('Amenity', amenity_id)
@@ -34,13 +35,14 @@ def delete_place_amenity(amenity_id, place_id):
             amenity_linked = True
     if amenity_linked is False:
         abort(404)
-    storage.delete(my_amenity)
-    storage.save()
+    place.amenities.remove(my_amenity)
+    place.save()
     return jsonify({}), 200
+
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['POST'])
 def link_place_amenity(amenity_id, place):
-    """ Delete an object """
+    """ Link an amenity to a place """
     my_amenity = storage.get('Amenity', amenity_id)
     my_place = storage.get('Place', place_id)
     if my_amenity is None or my_place is None:
