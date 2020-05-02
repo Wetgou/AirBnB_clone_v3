@@ -23,12 +23,12 @@ def list_reviews(place_id=None):
 
 
 @app_views.route('/reviews/<review_id>', methods=['GET'])
-def search_review(review_id=None):
-    """ Return  a review by id """
-    my_review = storage.get('Review', review_id)
-    if my_review is not None:
-        return jsonify(my_review.to_dict())
-    else:
+def get_review(review_id):
+    '''Retrieves a review for a place'''
+    try:
+        review = storage.get('Review', review_id).to_dict()
+        return jsonify(review)
+    except Exception:
         abort(404)
 
 
