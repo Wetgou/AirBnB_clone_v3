@@ -47,8 +47,7 @@ def link_place_amenity(amenity_id, place):
     my_place = storage.get('Place', place_id)
     if my_amenity is None or my_place is None:
         abort(404)
-    for amenity in my_place.amenities():
-        if my_amenity.id == amenity.id:
-            return jsonify(my_amenity.to_dict()), 200
+    if my_amenity in my_place.amenities:
+        return jsonify(my_amenity.to_dict()), 200
     my_place.amenities.append(my_amenity)
     return jsonify(my_amenity.to_dict()), 201
